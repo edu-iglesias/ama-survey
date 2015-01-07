@@ -15,3 +15,8 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+
+Route::get( 'admin/original', 'AdminController@original');
+Route::get( '/admin', 'AdminController@index');
+Route::get( '/admin/dashboard', 'AdminController@dashboard');
+Route::get( '/admin/tabs', 'AdminController@tabs');
