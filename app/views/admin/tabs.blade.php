@@ -10,53 +10,57 @@
 
 @section("content")
 
-	<div class="alert alert-info alert-dismissable">
+	@if(Session::get('success'))
+	<div class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!
+        <p>{{ Session::get('success') }}</p>
+        {{ Session::forget('success') }}
     </div>
+    @endif
 	
 	<div class="form-group @if ($errors->has('email')) has-error @endif">
+		{{ Form::open( ['role'=>'form'] ) }}
+
 		<div class="col-md-3">
-        {{ Form::text('email',null,['class' => 'form-control', 'placeholder' => 'Tab Name','maxlength'=>'50']) }}
-        @if ($errors->has('email')) <p class="help-block">{{ $errors->first('email') }}</p> @endif
+        	{{ Form::text('tab_name',null,['class' => 'form-control', 'placeholder' => 'Tab Name','maxlength'=>'50']) }}
+        	@if ($errors->has('email')) <p class="help-block">{{ $errors->first('email') }}</p> @endif
     	</div>
-    	{{ Form::submit("Create Tab", ['class'=>'btn btn-success']) }}
+
+    	{{ Form::submit("Create Tab", ['class'=>'btn btn-success','id'=>'submit']) }}
+
+    	{{ Form::close() }}
     </div>
 
     <div class="col-md-8">
     	<table class="table">
     		<thead>
-    			<th>Tab Name</th>
+    			<th align="center">Tab Name</th>
     			<th>Actions</th>
     		</thead>
     		<tbody>
-	    		<tr>
-	    			<td>hahaha</td>
-	    			<td>
-	    				{{ Form::button("Edit", ['class'=>'btn btn-warning']) }}
-	    				{{ Form::button("Delete", ['class'=>'btn btn-danger']) }}
 
-	    			</td>
-	    		</tr>
+    			@if(count($tabs) == 0)
+    				<tr>
+    					<td colspan="2" align="center">There are no tabs</td>
+    				</tr>
+    			@else
+    				@foreach($tabs as $tab)
+    				<tr>
+    					<td>
+    						{{ $tab->tab_name; }}
+    					</td>
 
-	    		<tr>
-	    			<td>hahaha</td>
-	    			<td>
-	    				{{ Form::button("Edit", ['class'=>'btn btn-warning']) }}
-	    				{{ Form::button("Delete", ['class'=>'btn btn-danger']) }}
+    					<td>
+	    					<a href="tabs/remove/{{$tab->id}}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i></a>
+	    					<a href="tabs/remove/{{$tab->id}}" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Remove"><i class="fa fa-times"></i></a>
+	    				</td>
+	    			<tr>
+    				@endforeach
 
-	    			</td>
-	    		</tr>
-
-	    		<tr>
-	    			<td>hahaha</td>
-	    			<td>
-	    				{{ Form::button("Edit", ['class'=>'btn btn-warning']) }}
-	    				{{ Form::button("Delete", ['class'=>'btn btn-danger']) }}
-
-	    			</td>
-	    		</tr>
+    			@endif
+	    	
     		</tbody>
     	</table>
+    	<center> {{ $tabs->links(); }} </center>
     </div>
 @stop

@@ -54,16 +54,16 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="/admin/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="tabs"><i class="fa fa-plus-square-o"></i> Tabs </a>
+                        <a href="/admin/tabs"><i class="fa fa-plus-square-o"></i> Tabs </a>
                     </li>
                     <li>
-                        <a href="questions"><i class="fa fa-file-text-o"></i> Questions </a>
+                        <a href="/admin/questions"><i class="fa fa-file-text-o"></i> Questions </a>
                     </li>
                     <li>
-                        <a href="answers"><i class="fa fa-pencil-square-o"></i> Answers </a>
+                        <a href="/admin/answers"><i class="fa fa-pencil-square-o"></i> Answers </a>
                     </li>
                     <li>
                         <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
@@ -126,6 +126,21 @@
     {{ HTML::script('js/plugins/morris/raphael.min.js') }}
     {{ HTML::script('js/plugins/morris/morris.min.js') }}
     {{ HTML::script('js/plugins/morris/morris-data.js') }}
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.tool-tip').tooltip();
+        });
+    </script>
+
+    <!-- To disable button after clicking -->
+    <script>
+        $(function() {
+            $('form').bind('submit', function() {
+                $(this).find('input:submit').attr('disabled', true);
+            });
+        }); 
+    </script>
 
 </body>
 

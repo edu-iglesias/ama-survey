@@ -20,7 +20,9 @@ class AdminController extends BaseController
 
 	public function tabs()
 	{
-		return View::make('admin/tabs');
+		$tabs = Tabs::paginate("10");
+		return View::make('admin/tabs')
+			->with('tabs', $tabs);
 	}
 
 }

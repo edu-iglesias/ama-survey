@@ -17,6 +17,16 @@ Route::get('/', function()
 });
 
 Route::get( 'admin/original', 'AdminController@original');
+
 Route::get( '/admin', 'AdminController@index');
+
 Route::get( '/admin/dashboard', 'AdminController@dashboard');
-Route::get( '/admin/tabs', 'AdminController@tabs');
+
+Route::get( '/admin/tabs', 'TabsController@index');
+Route::post( '/admin/tabs', 'TabsController@create');
+Route::post( '/admin/tabs/remove/{id}', 'TabsController@remove');
+
+Route::get('admin/questions','QuestionsController@index');
+Route::get('admin/questions/create','QuestionsController@create');
+Route::post('admin/questions/create','QuestionsController@do_create');
+
